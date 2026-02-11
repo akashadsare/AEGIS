@@ -1,0 +1,16 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install MCP SDK
+RUN pip install mcp
+
+# Copy the database and the script
+COPY hospital.db /app/hospital.db
+COPY clinical_server.py /app/clinical_server.py
+
+# Make sure the app can write to the DB if needed
+RUN chmod 777 /app/hospital.db
+
+# Run the server
+CMD ["python", "/app/clinical_server.py"]

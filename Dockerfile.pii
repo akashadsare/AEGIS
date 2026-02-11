@@ -1,0 +1,14 @@
+# Use a lightweight Python image
+FROM python:3.10-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Install the required library
+RUN pip install mcp
+
+# Copy your script from your laptop into the container
+COPY pii_server.py /app/pii_server.py
+
+# (Optional) Set the default command, though Archestra can override it
+CMD ["python", "/app/pii_server.py"]
