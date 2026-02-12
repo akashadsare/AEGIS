@@ -7,6 +7,8 @@
 
 AEGIS is a multi-agent medical diagnostic swarm built on Archestra.
 
+[![AEGIS Demo Video](https://img.youtube.com/vi/ElzP7QXlmlk/0.jpg)](https://youtu.be/ElzP7QXlmlk)
+
 **Technical Highlights:**
 
 - **Custom Python MCP Servers**: Created a PII redaction layer and a private SQLite EHR integration.
