@@ -5,9 +5,9 @@
 
 ## The Vision
 
-AEGIS is a multi-agent medical diagnostic swarm built on Archestra.
+AEGIS is a multi-agent medical diagnostic swarm built on Archestra (Demo below shows a single-step interaction logic).
 
-[![AEGIS Demo Video](https://img.youtube.com/vi/ElzP7QXlmlk/0.jpg)](https://youtu.be/ElzP7QXlmlk)
+![Single Prompt Example](images/one_prompt_example.gif)
 
 **Technical Highlights:**
 
@@ -206,12 +206,8 @@ User Prompt: "Patient John Doe (SSN: 123-45-6789) has severe throat swelling and
 
 ### Demo in Action
 
-**Full Swarm Walkthrough:**
+**Watch the Full Narrated Demo:**
 [![AEGIS Full Demo](https://img.youtube.com/vi/ElzP7QXlmlk/0.jpg)](https://youtu.be/ElzP7QXlmlk)
-
-**Single Step Interaction Example:**
-
-![Single Prompt Example](images/one_prompt_example.gif)
 
 ---
 
