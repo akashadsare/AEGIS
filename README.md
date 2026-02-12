@@ -206,7 +206,11 @@ User Prompt: "Patient John Doe (SSN: 123-45-6789) has severe throat swelling and
 
 ### Demo in Action
 
+**Full Swarm Walkthrough:**
 [![AEGIS Full Demo](https://img.youtube.com/vi/ElzP7QXlmlk/0.jpg)](https://youtu.be/ElzP7QXlmlk)
+
+**Single Step Interaction Example:**
+[one_prompt_example.mp4](images/one_prompt_example.mp4)
 
 ---
 
