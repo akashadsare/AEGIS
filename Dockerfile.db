@@ -3,7 +3,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Install MCP SDK
-RUN pip install mcp
+RUN pip install mcp[fastmcp]
 
 # Copy the database and the script
 COPY hospital.db /app/hospital.db

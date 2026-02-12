@@ -1,6 +1,7 @@
 # AEGIS: Privacy-Preserving AI Medical Swarm
 
-Built for the "Too Fast to MCP" Hackathon
+![AEGIS Logo](images/Logo.png)
+
 
 ## The Vision
 
@@ -17,12 +18,16 @@ We solve the AI "Black Box" and "Privacy" problems in modern healthcare.
 
 ## SOTA Features
 
-- **Infrastructure-Level Privacy**: Uses a custom Python MCP server to redact PII (Personally Identifiable Information) before patient notes reach the LLM.
-- **Live Context Integration**: Connects directly to hospital EHRs (simulated via a Python-SQLite MCP) to identify hidden risks like allergies or pregnancy.
+- **Advanced PII Scrubber**: Integrated with **Microsoft Presidio** for high-accuracy NER-based redaction of Names, SSNs, Emails, and more.
+- **Global PII Support**: Custom support for Indian identifiers, including **Aadhaar**, **PAN Card**, and **Indian Phone Numbers**, ensuring compliance with both HIPAA (US) and DISHA (India).
+- **Intelligent Identity Mapping**: Automatically maps detected names to deterministic Patient IDs for seamless cross-agent clinical lookups.
+- **Live Context Integration**: Connects directly to hospital EHRs (simulated via a Python-SQLite MCP) with pre-seeded multi-national patient data.
 - **Multi-Agent Verification**: Implements a "Pharmacist Guardrail" agent that peer-reviews the AI's own suggestions to prevent lethal drug interactions.
 - **Zero-Trust Observability**: Full audit trails in Archestra prove exactly which data source triggered a medical warning.
 
 ## Clean Architecture
+
+![Agents Architecture](images/agents_architecture.png)
 
 AEGIS utilizes a Swarm Orchestration pattern. Instead of one giant, hallucination-prone prompt, the workload is split into specialized units:
 
@@ -34,11 +39,18 @@ AEGIS utilizes a Swarm Orchestration pattern. Instead of one giant, hallucinatio
 
 ## Technical Stack
 
+![MCPs Used](images/mcp's_used.png)
+
 - **Platform**: Archestra (Dockerized)
 - **Protocol**: Model Context Protocol (MCP)
 - **Intelligence**: Llama-3.3-70b (via Groq for ultra-low latency)
 - **Custom Servers**: Python-based FastMCP servers for Security and Data layers.
 - **Database**: SQLite (Embedded Clinical Records).
+
+## 🚀 Quick Links
+- **[Installation & Setup](#installation--setup)**: Docker-based setup.
+- **[Local Usage Guide](USAGE.md)**: How to run without Docker.
+- **[Requirements](requirements.txt)**: List of Python dependencies.
 
 ## Installation & Setup
 
@@ -103,6 +115,7 @@ AEGIS utilizes a Swarm Orchestration pattern. Instead of one giant, hallucinatio
 
    - Aegis Security: Image aegis-pii, Command python, Arg /app/pii_server.py.
    - Clinical Records: Image clinical-db, Command python, Arg /app/clinical_server.py.
+   - Search API: Add the fatwang2__search1api-mcp MCP server for medical research and verification.
 
 4. **Configure Agents**
 
@@ -175,7 +188,7 @@ AEGIS utilizes a Swarm Orchestration pattern. Instead of one giant, hallucinatio
    CRITICAL: If the Pharmacist issues a RED ALERT, you must highlight this prominently in the recommendation section of your report.
    ```
 
-## The Winning Demo
+## Demo
 
 **Scenario: The Penicillin Trap**
 
@@ -183,11 +196,37 @@ User Prompt: "Patient John Doe (SSN: 123-45-6789) has severe throat swelling and
 
 **The AEGIS Response Flow:**
 
-- **Redaction**: The system immediately swaps "John Doe" for PATIENT_001.
-- **Context Discovery**: The system queries the clinical database and discovers PATIENT_001 has a documented Penicillin Allergy.
-- **Research**: The researcher finds that for severe throat swelling (likely Peritonsillar Abscess), Clindamycin is the preferred alternative for penicillin-allergic patients.
+- **Redaction**: The system immediately swaps "John Doe" for `PATIENT_001` or "Rahul Sharma" for `PATIENT_003`, while redacting Aadhaar/SSN.
+- **Context Discovery**: The system queries the clinical database and discovers `PATIENT_001` has a documented Penicillin Allergy or `PATIENT_004` has G6PD deficiency.
+- **Research**: The researcher finds that for severe throat swelling, Clindamycin is the preferred alternative for penicillin-allergic patients.
 - **Verification**: The Safety Pharmacist issues a GREEN LIGHT for Clindamycin but a RED ALERT for any Beta-lactam suggestion.
 - **Synthesis**: The user receives a comprehensive report with dosage, rationale, and citations.
+
+### Demo in Action
+
+[Watch the Demo Video](images/one_prompt_example.gif.mp4)
+
+---
+
+## Test Prompts for Demo
+
+Use these prompts to test the full AEGIS swarm integration:
+
+### 1. The Penicillin Trap (US Context)
+> "I have a patient, **John Doe (SSN: 123-45-6789)**. He has severe throat swelling and needs antibiotics. He is currently in the ER and the resident suggested **Penicillin**. What is the safest course of action?"
+*   **Tests**: SSN redaction, Penicillin allergy lookup, alternative antibiotic research.
+
+### 2. The Chronic Asthma Case (India Context)
+> "Patient **Rahul Sharma (Aadhaar: 1234 5678 9012)** is complaining of acute shortness of breath and chest tightness. He is visiting from Delhi. Please look up his history and suggest a stabilization protocol."
+*   **Tests**: Aadhaar redaction, Indian name mapping to `PATIENT_003`, asthma history retrieval.
+
+### 3. High-Risk Contraindication (G6PD Deficiency)
+> "A junior doctor wants to prescribe **Primaquine** for malaria to **Priya Patel (PAN Card: ABCDE1234F)**. Check if this is safe based on her medical record and history of anemia."
+*   **Tests**: PAN Card redaction, G6PD deficiency identification (PATIENT_004), Pharmacist RED ALERT for oxidant drugs.
+
+### 4. Pregnancy Safety Guardrail
+> "Patient **Jane Smith (SSN: 987-65-4321, Phone: +1-555-0123)** has a high fever and a bad urinary tract infection. We want to give her **Ciprofloxacin**. Verify if this is contraindicated for her right now."
+*   **Tests**: Multiple PII redaction, Pregnancy status identification (PATIENT_002), safety check for pregnancy-safe antibiotics.
 
 ## Enterprise Readiness
 
@@ -195,9 +234,9 @@ User Prompt: "Patient John Doe (SSN: 123-45-6789) has severe throat swelling and
 - **Revocable Access**: Database access is governed by Archestra Tool Policies; access can be revoked instantly without touching code.
 - **Scalable**: Designed to run on Kubernetes via Archestra's native orchestration.
 
-Developed for 2 Fast 2 MCP Hackathon 2026  
 "Ensuring the future of medical AI is private, accurate, and safe."
 
 Made by Akash Adsare
 
-This README file was generated using Copilot.
+--- 
+*Note: This README and the comments within this project were generated using AI.*

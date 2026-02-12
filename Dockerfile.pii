@@ -4,8 +4,9 @@ FROM python:3.10-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Install the required library
-RUN pip install mcp
+# Install dependencies for PII scrubbing
+RUN pip install mcp[fastmcp] presidio-analyzer presidio-anonymizer spacy && \
+    python -m spacy download en_core_web_lg
 
 # Copy your script from your laptop into the container
 COPY pii_server.py /app/pii_server.py
