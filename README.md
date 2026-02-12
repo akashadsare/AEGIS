@@ -1,7 +1,18 @@
-# AEGIS: Privacy-Preserving AI Medical Swarm
+<p align="center">
+  <img src="images/Logo.png" width="300" alt="AEGIS Logo" />
+</p>
 
-![AEGIS Logo](images/Logo.png)
+<h1 align="center">AEGIS</h1>
+<p align="center"><b>Privacy-Preserving AI Medical Swarm</b></p>
 
+<p align="center">
+  <a href="#the-vision"><b>Vision</b></a> •
+  <a href="#demo-in-action"><b>Demo Video</b></a> •
+  <a href="#installation--setup"><b>Setup</b></a> •
+  <a href="https://github.com/akashadsare/AEGIS"><b>GitHub</b></a>
+</p>
+
+---
 
 ## The Vision
 
