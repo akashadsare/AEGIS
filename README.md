@@ -1,6 +1,9 @@
 <p align="center">
-  <img src="images/aegis_banner_final.png" alt="AEGIS Banner" />
+  <img src="images/Logo.png" width="300" alt="AEGIS Logo" />
 </p>
+
+<h1 align="center">AEGIS</h1>
+<p align="center"><b>Privacy-Preserving AI Medical Swarm</b></p>
 
 <p align="center">
   <a href="#the-vision"><b>Vision</b></a> •
