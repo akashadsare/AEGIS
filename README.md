@@ -1,7 +1,4 @@
-<p align="center">
-  <img src="images/Logo.png" width="300" alt="AEGIS Logo" />
-</p>
-
+![AEGIS](/images/Logo.png)
 <h1 align="center">AEGIS</h1>
 <p align="center"><b>Privacy-Preserving AI Medical Swarm</b></p>
 
